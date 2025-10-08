@@ -32,12 +32,22 @@ jobs:
           if [ -n "${{ secrets.GRAPHOPPER_API_KEY }}" ]; then
             echo "GRAPHOPPER_API_KEY=${{ secrets.GRAPHOPPER_API_KEY }}" >> local.properties
           fi
+      - name: Ensure AndroidX flags
+        run: |
+          echo "android.useAndroidX=true" >> gradle.properties
+          echo "android.enableJetifier=true" >> gradle.properties
 
       - name: Build with Gradle (managed)
         uses: gradle/gradle-build-action@v3
         with:
           gradle-version: 8.9
-          arguments: assembleDebug --stacktrace --info
+          arguments: |
+            --stacktrace
+            --warning-mode all
+            --no-daemon
+            --console=plain
+            clean
+            :app:assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
