@@ -71,7 +71,7 @@ class MainActivity : ComponentActivity(), TextToSpeech.OnInitListener {
 
     val ctx = applicationContext
     Configuration.getInstance().load(ctx, ctx.getSharedPreferences("osmdroid", MODE_PRIVATE))
-    Configuration.getInstance().userAgentValue = BuildConfig.APPLICATION_ID
+    Configuration.getInstance().userAgentValue = applicationContext.packageName
 
     setContentView(R.layout.activity_main)
     map = findViewById(R.id.map)
