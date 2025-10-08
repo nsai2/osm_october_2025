@@ -3,4 +3,17 @@ plugins {
   id 'com.android.application' version '8.6.1'
   id 'org.jetbrains.kotlin.android' version '2.0.20'
 }
+android {
+  namespace 'com.example.osmnav'
+  compileSdk 34
+
+  defaultConfig {
+    applicationId 'com.example.osmnav'
+    minSdk 24
+    targetSdk 34
+    versionCode 1
+    versionName "1.0"
+  }
+  …
+}
 
