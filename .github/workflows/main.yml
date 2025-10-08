@@ -18,9 +18,18 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Build with Gradle
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      # (Optional) Write GraphHopper key from repo secret into local.properties
+      - name: Configure local.properties
+        run: |
+          echo "GRAPHOPPER_API_KEY=${{ secrets.GRAPHOPPER_API_KEY }}" >> local.properties
+
+      - name: Build with Gradle (no wrapper)
         uses: gradle/gradle-build-action@v3
         with:
+          gradle-version: 8.9
           arguments: assembleDebug
 
       - name: Upload APK
